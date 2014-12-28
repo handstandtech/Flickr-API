@@ -5,7 +5,7 @@
 	<artifactId>flickr</artifactId>
 	<groupId>com.handstandtech</groupId>
 	<packaging>jar</packaging>
-	<version>0.9.1</version>
+	<version>0.9.3-SNAPSHOT</version>
 	<name>Handstand Tech - Flickr</name>
 	<properties>
 		<!-- Project properties -->
