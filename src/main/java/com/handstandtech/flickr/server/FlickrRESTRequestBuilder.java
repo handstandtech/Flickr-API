@@ -1,15 +1,15 @@
 package com.handstandtech.flickr.server;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.handstandtech.restclient.server.auth.Authenticator;
 import com.handstandtech.restclient.server.model.RESTRequest;
 import com.handstandtech.restclient.shared.model.RequestMethod;
 import com.handstandtech.restclient.shared.util.RESTURLUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FlickrRESTRequestBuilder {
-	private static final String BASE_URL = "http://api.flickr.com/services/rest/";
+	private static final String BASE_URL = "https://api.flickr.com/services/rest/";
 
 	public static RESTRequest people_searchByEmail(String email, Authenticator auth, String apiKey) {
 

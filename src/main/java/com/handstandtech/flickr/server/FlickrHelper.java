@@ -23,7 +23,7 @@ public class FlickrHelper {
 
 	private static final Logger log = LoggerFactory.getLogger(FlickrHelper.class);
 
-	private static final String BASE_OAUTH_URL = "http://www.flickr.com/services/oauth/";
+	private static final String BASE_OAUTH_URL = "https://www.flickr.com/services/oauth/";
 
 	protected OAuthConsumer consumer;
 	protected RESTClientProvider restProvider;
