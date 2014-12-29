@@ -1,10 +1,14 @@
 package com.handstandtech.flickr.shared.model.places;
 
+import com.handstandtech.flickr.shared.model.content.FlickrStringContent;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.List;
 
-import com.handstandtech.flickr.shared.model.content.FlickrStringContent;
-
+@NoArgsConstructor
+@Data
 public class FlickrPolylines implements Serializable {
 
 	/**
@@ -15,11 +19,5 @@ public class FlickrPolylines implements Serializable {
 	private List<FlickrStringContent> polyline;
 	
 	private FlickrStringContent shapefile;
-	
-	public FlickrPolylines() {
-		
-	}
-	
-	
 
 }

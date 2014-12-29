@@ -1,9 +1,13 @@
 package com.handstandtech.flickr.shared.model.photosets;
 
+import com.handstandtech.flickr.shared.model.FlickrPhotoset;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
-import com.handstandtech.flickr.shared.model.FlickrPhotoset;
-
+@Data
+@NoArgsConstructor
 public class PhotosetsGetPhotosResult implements Serializable {
 
 	/**
@@ -14,25 +18,6 @@ public class PhotosetsGetPhotosResult implements Serializable {
 	private FlickrPhotoset photoset;
 	
 	private String stat;
-	
-	public PhotosetsGetPhotosResult() {
-		super();
-	}
 
-	public void setStat(String stat) {
-		this.stat = stat;
-	}
-
-	public String getStat() {
-		return stat;
-	}
-
-	public void setPhotoset(FlickrPhotoset photoset) {
-		this.photoset = photoset;
-	}
-
-	public FlickrPhotoset getPhotoset() {
-		return photoset;
-	}
 
 }

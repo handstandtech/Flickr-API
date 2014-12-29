@@ -1,8 +1,12 @@
 package com.handstandtech.flickr.shared.model.places;
 
 import com.handstandtech.flickr.shared.model.content.FlickrStringContent;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+@NoArgsConstructor
+@Data
 public class FlickrPlaceInfo extends FlickrStringContent implements Country {
 
 	/**
@@ -19,20 +23,6 @@ public class FlickrPlaceInfo extends FlickrStringContent implements Country {
 	private String place_url;
 
 	private String woeid;
-
-	public FlickrPlaceInfo() {
-
-	}
-
-	@Override
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	@Override
-	public Double getLongitude() {
-		return longitude;
-	}
 
 	@Override
 	public String getName() {

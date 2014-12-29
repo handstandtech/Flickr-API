@@ -1,8 +1,12 @@
 package com.handstandtech.flickr.shared.model.content;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
-
+@Data
+@NoArgsConstructor
 public class FlickrTimeContent implements Serializable {
 
 	/**
@@ -11,18 +15,6 @@ public class FlickrTimeContent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String _content;
-
-	public FlickrTimeContent() {
-		super();
-	}
-
-	public void set_content(String _content) {
-		this._content = _content;
-	}
-
-	public String get_content() {
-		return _content;
-	}
 
 	public Long getTime() {
 		return Long.parseLong(_content);

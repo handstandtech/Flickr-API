@@ -1,7 +1,12 @@
 package com.handstandtech.flickr.shared.model.places;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
+@NoArgsConstructor
+@Data
 public class FlickrShapedata implements Serializable{
 
 	/**
@@ -22,9 +27,5 @@ public class FlickrShapedata implements Serializable{
 	private Integer is_donuthole;
 	
 	private FlickrPolylines polylines;
-	
-	public FlickrShapedata() {
-		
-	}
 
 }

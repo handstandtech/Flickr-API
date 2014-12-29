@@ -1,7 +1,11 @@
 package com.handstandtech.flickr.shared.model.content;
 
-import java.io.Serializable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+@Data
+@NoArgsConstructor
 public class FlickrNumberContent implements Serializable {
 
 	/**
@@ -10,17 +14,4 @@ public class FlickrNumberContent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String _content;
-	
-	public FlickrNumberContent() {
-		super();
-	}
-
-	public void set_content(String _content) {
-		this._content = _content;
-	}
-
-	public String get_content() {
-		return _content;
-	}
-
 }
