@@ -1,10 +1,10 @@
 package com.handstandtech.flickr.shared.model;
 
-import java.io.Serializable;
-
 import com.handstandtech.flickr.shared.model.content.FlickrStringContent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @NoArgsConstructor
 @Data
@@ -21,7 +21,7 @@ public class FlickrPhotosetInfo implements Serializable {
 	
 	private String id;
 	
-	private String photos;
+	private Integer photos;
 	
 	private String primary;
 	

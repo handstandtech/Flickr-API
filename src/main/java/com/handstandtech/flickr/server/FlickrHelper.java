@@ -1,12 +1,5 @@
 package com.handstandtech.flickr.server;
 
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.OAuthProvider;
-import oauth.signpost.basic.DefaultOAuthProvider;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.handstandtech.flickr.shared.model.FlickrPerson;
 import com.handstandtech.flickr.shared.model.FlickrPhotoset;
 import com.handstandtech.flickr.shared.model.FlickrPhotosetInfos;
@@ -18,103 +11,107 @@ import com.handstandtech.restclient.server.auth.Authenticator;
 import com.handstandtech.restclient.server.auth.oauth.OAuthAuthenticatorProvider;
 import com.handstandtech.restclient.server.model.RESTRequest;
 import com.handstandtech.restclient.shared.model.RESTResult;
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.basic.DefaultOAuthProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FlickrHelper {
 
-	private static final Logger log = LoggerFactory.getLogger(FlickrHelper.class);
+    private static final Logger log = LoggerFactory.getLogger(FlickrHelper.class);
 
-	private static final String BASE_OAUTH_URL = "https://www.flickr.com/services/oauth/";
+    private static final String BASE_OAUTH_URL = "https://www.flickr.com/services/oauth/";
 
-	protected OAuthConsumer consumer;
-	protected RESTClientProvider restProvider;
-	protected OAuthAuthenticatorProvider oAuthProvider;
+    protected OAuthConsumer consumer;
+    protected RESTClientProvider restProvider;
+    protected OAuthAuthenticatorProvider oAuthProvider;
 
-	public FlickrHelper(OAuthConsumer consumer, RESTClientProvider restProvider, OAuthAuthenticatorProvider oAuthProvider) {
-		this.consumer = consumer;
-		this.restProvider = restProvider;
-		this.oAuthProvider = oAuthProvider;
-	}
+    public FlickrHelper(OAuthConsumer consumer, RESTClientProvider restProvider, OAuthAuthenticatorProvider oAuthProvider) {
+        this.consumer = consumer;
+        this.restProvider = restProvider;
+        this.oAuthProvider = oAuthProvider;
+    }
 
-	
 
-	public FlickrHelper(OAuthConsumer consumer, String token, String tokenSecret, RESTClientProvider restProvider, OAuthAuthenticatorProvider oAuthProvider) {
-		this.consumer = consumer;
-		this.consumer.setTokenWithSecret(token, tokenSecret);
-		this.restProvider = restProvider;
-		this.oAuthProvider = oAuthProvider;
-	}
-	
-	public String getAPIKey() {
-		return consumer.getConsumerKey();
-	}
+    public FlickrHelper(OAuthConsumer consumer, String token, String tokenSecret, RESTClientProvider restProvider, OAuthAuthenticatorProvider oAuthProvider) {
+        this.consumer = consumer;
+        this.consumer.setTokenWithSecret(token, tokenSecret);
+        this.restProvider = restProvider;
+        this.oAuthProvider = oAuthProvider;
+    }
 
-	private Authenticator getAuthenticator() {
-		Authenticator a = null;
-		if (consumer != null) {
-			a = oAuthProvider.getAuthenticator(consumer);
-		}
-		return a;
-	}
+    public String getAPIKey() {
+        return consumer.getConsumerKey();
+    }
 
-	public FlickrUser people_searchByEmail(String email) {
-		RESTRequest restRequest = FlickrRESTRequestBuilder.people_searchByEmail(email, getAuthenticator(), getAPIKey());
-		RESTClient client = createRESTClientInstance();
-		RESTResult restResult = client.request(restRequest);
-		log.info(restResult.toString());
-		return FlickrUtils.getSearchByEmailResult(restResult);
-	}
+    private Authenticator getAuthenticator() {
+        Authenticator a = null;
+        if (consumer != null) {
+            a = oAuthProvider.getAuthenticator(consumer);
+        }
+        return a;
+    }
 
-	private RESTClient createRESTClientInstance() {
-		return restProvider.getNewClientInstance();
-	}
+    public FlickrUser people_searchByEmail(String email) {
+        RESTRequest restRequest = FlickrRESTRequestBuilder.people_searchByEmail(email, getAuthenticator(), getAPIKey());
+        RESTClient client = createRESTClientInstance();
+        RESTResult restResult = client.request(restRequest);
+        return FlickrUtils.getSearchByEmailResult(restResult);
+    }
 
-	public FlickrPhotosetInfos photosets_getList(String user_id) {
-		RESTRequest restRequest = FlickrRESTRequestBuilder.photosets_getList(user_id, getAuthenticator(), getAPIKey());
-		RESTClient client = createRESTClientInstance();
-		RESTResult restResult = client.request(restRequest);
-		log.info(restResult.toString());
-		return FlickrUtils.getPhotosetInfosFromResult(restResult);
-	}
+    private RESTClient createRESTClientInstance() {
+        return restProvider.getNewClientInstance();
+    }
 
-	public FlickrPlace places_getInfo(String place_id) {
-		RESTRequest restRequest = FlickrRESTRequestBuilder.places_getInfo(place_id, getAuthenticator(), getAPIKey());
-		RESTClient client = createRESTClientInstance();
-		RESTResult restResult = client.request(restRequest);
-		log.info(restResult.toString());
-		return FlickrUtils.getPlacesInfoFromResult(restResult);
-	}
+    public FlickrPhotosetInfos photosets_getList(String user_id) {
+        RESTRequest restRequest = FlickrRESTRequestBuilder.photosets_getList(user_id, getAuthenticator(), getAPIKey());
+        RESTClient client = createRESTClientInstance();
+        RESTResult restResult = client.request(restRequest);
+        return FlickrUtils.getPhotosetInfosFromResult(restResult);
+    }
 
-	public FlickrPhotoset photosets_getPhotos(String photoset_id) {
-		RESTRequest restRequest = FlickrRESTRequestBuilder.photosets_getPhotos(photoset_id, getAuthenticator(), getAPIKey());
-		RESTClient client = createRESTClientInstance();
-		RESTResult restResult = client.request(restRequest);
-		log.info(restResult.toString());
-		return FlickrUtils.getPhotosetFromResult(restResult);
-	}
+    public FlickrPlace places_getInfo(String place_id) {
+        RESTRequest restRequest = FlickrRESTRequestBuilder.places_getInfo(place_id, getAuthenticator(), getAPIKey());
+        RESTClient client = createRESTClientInstance();
+        RESTResult restResult = client.request(restRequest);
+        return FlickrUtils.getPlacesInfoFromResult(restResult);
+    }
 
-	public FlickrPerson people_getInfo(String id) {
-		RESTRequest restRequest = FlickrRESTRequestBuilder.people_getInfo(id, getAuthenticator(), getAPIKey());
-		RESTClient client = createRESTClientInstance();
-		RESTResult restResult = client.request(restRequest);
-		log.info(restResult.toString());
-		return FlickrUtils.getPersonFromResult(restResult);
-	}
+    public FlickrPhotoset photosets_getPhotos(String photoset_id, Integer page, Integer per_page) {
+        if (page == null) {
+            page = 1;
+        }
+        if (per_page == null) {
+            per_page = 500;
+        }
+        RESTRequest restRequest = FlickrRESTRequestBuilder.photosets_getPhotos(photoset_id, page, per_page, getAuthenticator(), getAPIKey());
+        RESTClient client = createRESTClientInstance();
+        RESTResult restResult = client.request(restRequest);
+        return FlickrUtils.getPhotosetFromResult(restResult);
+    }
 
-	public FlickrUser test_login() {
-		RESTRequest restRequest = FlickrRESTRequestBuilder.test_login(getAuthenticator(), getAPIKey());
-		RESTClient client = createRESTClientInstance();
-		RESTResult restResult = client.request(restRequest);
-		log.info(restResult.toString());
-		return FlickrUtils.getFlickrUserFromResult(restResult);
-	}
+    public FlickrPerson people_getInfo(String id) {
+        RESTRequest restRequest = FlickrRESTRequestBuilder.people_getInfo(id, getAuthenticator(), getAPIKey());
+        RESTClient client = createRESTClientInstance();
+        RESTResult restResult = client.request(restRequest);
+        return FlickrUtils.getPersonFromResult(restResult);
+    }
 
-	public static OAuthProvider getFlickrOAuthProvider(FlickrPerm perms) {
-		OAuthProvider provider = new DefaultOAuthProvider(BASE_OAUTH_URL + "request_token", BASE_OAUTH_URL + "access_token", BASE_OAUTH_URL + "authorize?perms=" + perms.getValue());
-		return provider;
-	}
+    public FlickrUser test_login() {
+        RESTRequest restRequest = FlickrRESTRequestBuilder.test_login(getAuthenticator(), getAPIKey());
+        RESTClient client = createRESTClientInstance();
+        RESTResult restResult = client.request(restRequest);
+        return FlickrUtils.getFlickrUserFromResult(restResult);
+    }
 
-	public void setTokenAndSecret(String token, String tokenSecret) {
-		consumer.setTokenWithSecret(token, tokenSecret);
-	}
+    public static OAuthProvider getFlickrOAuthProvider(FlickrPerm perms) {
+        OAuthProvider provider = new DefaultOAuthProvider(BASE_OAUTH_URL + "request_token", BASE_OAUTH_URL + "access_token", BASE_OAUTH_URL + "authorize?perms=" + perms.getValue());
+        return provider;
+    }
+
+    public void setTokenAndSecret(String token, String tokenSecret) {
+        consumer.setTokenWithSecret(token, tokenSecret);
+    }
 
 }

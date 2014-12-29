@@ -48,10 +48,14 @@ public class FlickrRESTRequestBuilder {
 
 	}
 
-	public static RESTRequest photosets_getPhotos(String photoset_id, Authenticator auth, String apiKey) {
+	public static RESTRequest photosets_getPhotos(String photoset_id, Integer page, Integer per_page, Authenticator auth, String apiKey) {
 		Map<String, String> params = getBaseParams(apiKey);
 		params.put("method", "flickr.photosets.getPhotos");
-		params.put("photoset_id", photoset_id);
+        params.put("photoset_id", photoset_id);
+        params.put("per_page", Integer.toString(per_page));
+        params.put("page", Integer.toString(page));
+        params.put("media", "photos");
+
 		params.put("extras", "geo,date_taken,last_update,url_sq,url_t,url_s,url_m,url_o");
 
 		// Privacy Filter is Off (We can see private photos)
